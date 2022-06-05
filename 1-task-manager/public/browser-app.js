@@ -11,10 +11,11 @@ const showTasks = async () => {
       data: { tasks },
     } = await axios.get('/api/v1/tasks')
     if (tasks.length < 1) {
-      tasksDOM.innerHTML = '<h5 class="empty-list">No tasks in your list</h5>'
+      tasksDOM.innerHTML = '<h5 class="empty-list">Nenhuma tarefa na sua lista</h5>'
       loadingDOM.style.visibility = 'hidden'
       return
     }
+
     const allTasks = tasks
       .map((task) => {
         const { completed, _id: taskID, name } = task
@@ -39,8 +40,9 @@ const showTasks = async () => {
     tasksDOM.innerHTML = allTasks
   } catch (error) {
     tasksDOM.innerHTML =
-      '<h5 class="empty-list">There was an error, please try later....</h5>'
+      '<h5 class="empty-list">Ocorreu um erro, tente mais tarde....</h5>'
   }
+
   loadingDOM.style.visibility = 'hidden'
 }
 
@@ -74,11 +76,11 @@ formDOM.addEventListener('submit', async (e) => {
     showTasks()
     taskInputDOM.value = ''
     formAlertDOM.style.display = 'block'
-    formAlertDOM.textContent = `success, task added`
+    formAlertDOM.textContent = `sucesso, tarefa adicionada`
     formAlertDOM.classList.add('text-success')
   } catch (error) {
     formAlertDOM.style.display = 'block'
-    formAlertDOM.innerHTML = `error, please try again`
+    formAlertDOM.innerHTML = `erro, tente novamente`
   }
   setTimeout(() => {
     formAlertDOM.style.display = 'none'
